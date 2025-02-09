@@ -23,18 +23,59 @@ args = parser.parse_args()
 cnt = 0
 def checkFlush(hand, community):
     cards = list(hand) + list(community)
+    if len(cards) < 5:
+        return False
     suitCount = {'hearts' : 0,
                  'diamonds' : 0,
                  'clubs' : 0,
                  'spades' : 0,}
     for card in cards:
-        suit = card['suit'].value
+        suit = card.suit.value
         suitCount[suit] += 1
         if suitCount[suit] >= 5:
             return True
     return False
 
 
+def checkStraight(hand, community):
+    cards = list(hand) + list(community)
+    if len(cards) < 5:
+        return False
+    cards.sort(key=lambda card: card.rank.value)
+    length = 1
+    for i in range(1, len(cards)):
+        if cards[i] - 1 != cards[i]:
+            length += 1
+            if length >= 5:
+                return True
+        else:
+            length = 1
+    return False
+
+def findPairs(hand, community):
+    """
+    :param hand: 2 cards dealt
+    :param community: cards shared
+    :return: number of doubles, triples and quadruples possible
+    """
+    rankCount = [0] * 15
+    cards = list(hand) + list(community)
+    doubles = 0
+    triples = 0
+    quadruples = 0
+    for card in cards:
+        curRank = card.rank.value
+        rankCount[curRank] += 1
+        if rankCount[curRank] == 2:
+            doubles += 1
+        elif rankCount[curRank] == 3:
+            triples += 1
+            doubles -= 1
+        elif rankCount[curRank] == 4:
+            quadruples += 1
+            triples -= 1
+
+    return (doubles, triples, quadruples)
 
 class TemplateBot(Bot):
     def act(self, state, hand):
