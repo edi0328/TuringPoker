@@ -1,4 +1,3 @@
-#Poker Bot
 This repository contains our code for the **McGill Poker Bot Tournament**, where our bot finished with a **profit of \$32**.  
 
 ---
