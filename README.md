@@ -1,5 +1,12 @@
-# Template Python Poker Bot
-This repo is a template for a Turing Poker bot written in Python. Two sample bots are included.
-The first, `main.py`, is a simple bot that always checks or calls. 
-The second, `kellycriterion.py`, simulates potential game outcomes to estimate the probability
-of winning the current hand, and uses the [Kelly Criterion](https://en.wikipedia.org/wiki/Kelly_criterion) to determine the optimal bet size.
+#Poker Bot
+This repository contains our code for the **McGill Poker Bot Tournament**, where our bot finished with a **profit of \$32**.  
+
+---
+
+## Strategy Overview
+Our bot uses a simple but effective heuristic:  
+- **Go all-in** when the probability of a good hand is below a certain threshold.  
+- **Check otherwise**.
+- **Fold if bet is too high and chances of winning are low**
+
+This algorithm was surprisingly competitive in the tournament setting, though it leaves plenty of room for strategic improvements.  
