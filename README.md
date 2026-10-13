@@ -1,11 +1,20 @@
-This repository contains our code for the **McGill Poker Bot Tournament**, where our bot finished with a **profit of \$32**.  
+# TuringPoker
 
----
+A Python poker bot client built for the McGill Poker Bot Tournament. It connects to a Turing Games server over WebSockets and responds to game updates.
 
-## Strategy Overview
-Our bot uses a simple but effective heuristic:  
-- **Go all-in** when the probability of a good hand is below a certain threshold.  
-- **Check otherwise**.
-- **Fold if bet is too high and chances of winning are low**
+The current `TemplateBot.act` implementation always calls. Experimental hand-analysis helpers are included but are not used by the bot's decisions.
 
-This algorithm was surprisingly competitive in the tournament setting, though it leaves plenty of room for strategic improvements.  
+## Run
+
+Install Python and connect to a running tournament server:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python main.py --host localhost --port 1999 --room my-new-room --username edison-bot
+```
+
+Use the host, port, and room provided by the tournament. The server is not included in this repository.
+
+Bot decisions live in `main.py`. The `tg/` package handles the protocol and shared types.
